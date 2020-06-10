@@ -24,18 +24,18 @@ class ActivityStore {
     this.loadingInitial = true;
     try {
       const activities = await agent.Activities.list();
-      runInAction('loading activities', () => {
+      runInAction("loading activities", () => {
         activities.forEach((activity) => {
           activity.date = activity.date.split(".")[0];
           this.activityRegistry.set(activity.id, activity);
         });
+        this.loadingInitial = false;
       });
-      this.loadingInitial = false;
     } catch (error) {
-      runInAction('load activities error', () => {
+      runInAction("load activities error", () => {
         console.log(error);
         this.loadingInitial = false;
-      })
+      });
     }
   };
 
@@ -43,16 +43,16 @@ class ActivityStore {
     this.submitting = true;
     try {
       await agent.Activities.create(activity);
-      runInAction('creating activity', () => {
+      runInAction("creating activity", () => {
         this.activityRegistry.set(activity.id, activity);
         this.editMode = false;
         this.submitting = false;
-      })
+      });
     } catch (error) {
       console.log(error);
-      runInAction('creating activity error', () => {
+      runInAction("creating activity error", () => {
         this.submitting = false;
-      })
+      });
     }
   };
 
@@ -60,17 +60,17 @@ class ActivityStore {
     this.submitting = true;
     try {
       await agent.Activities.update(activity);
-      runInAction('editing activity', () => {
+      runInAction("editing activity", () => {
         this.activityRegistry.set(activity.id, activity);
         this.selectedActivity = activity;
         this.editMode = false;
         this.submitting = false;
-      })
+      });
     } catch (error) {
       console.log(error);
-      runInAction('editing activity error', () => {
+      runInAction("editing activity error", () => {
         this.submitting = false;
-      })
+      });
     }
   };
 
@@ -82,17 +82,17 @@ class ActivityStore {
     this.target = event.currentTarget.name;
     try {
       await agent.Activities.delete(id);
-      runInAction('deleting activity', () => {
+      runInAction("deleting activity", () => {
         this.activityRegistry.delete(id);
         this.submitting = false;
         this.target = "";
-      })
+      });
     } catch (error) {
       console.log(error);
-      runInAction('deleting activity error', () => {
+      runInAction("deleting activity error", () => {
         this.submitting = false;
         this.target = "";
-      })
+      });
     }
   };
 
