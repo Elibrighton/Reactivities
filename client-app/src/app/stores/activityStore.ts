@@ -38,12 +38,11 @@ class ActivityStore {
         });
         this.loadingInitial = false;
       });
-      console.log(this.groupActivitiesByDate(activities))
     } catch (error) {
       runInAction("load activities error", () => {
-        console.log(error);
         this.loadingInitial = false;
       });
+      console.log(error);
     }
   };
 
@@ -61,9 +60,9 @@ class ActivityStore {
         });
       } catch (error) {
         runInAction(() => {
-          console.log(error);
           this.loadingInitial = false;
         });
+        console.log(error);
       }
     }
   };
@@ -85,10 +84,10 @@ class ActivityStore {
         this.submitting = false;
       });
     } catch (error) {
-      console.log(error);
       runInAction("creating activity error", () => {
         this.submitting = false;
       });
+      console.log(error);
     }
   };
 
@@ -102,10 +101,10 @@ class ActivityStore {
         this.submitting = false;
       });
     } catch (error) {
-      console.log(error);
       runInAction("editing activity error", () => {
         this.submitting = false;
       });
+      console.log(error);
     }
   };
 
@@ -123,11 +122,11 @@ class ActivityStore {
         this.target = "";
       });
     } catch (error) {
-      console.log(error);
       runInAction("deleting activity error", () => {
         this.submitting = false;
         this.target = "";
       });
+      console.log(error);
     }
   };
 }
